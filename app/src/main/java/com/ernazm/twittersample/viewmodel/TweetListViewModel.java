@@ -1,6 +1,6 @@
-package com.example.ernar.myapplication.viewmodel;
+package com.ernazm.twittersample.viewmodel;
 
-import com.example.ernar.myapplication.datamodel.Tweet;
+import com.ernazm.twittersample.datamodel.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.example.ernar.myapplication;
+package com.ernazm.twittersample;
 
 import android.app.Application;
 
-import com.example.ernar.myapplication.network.NetworkClient;
+import com.ernazm.twittersample.network.NetworkClient;
 
 
 public class App extends Application {

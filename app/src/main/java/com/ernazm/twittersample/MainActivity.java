@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication;
+package com.ernazm.twittersample;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.ernar.myapplication.network.NetworkClient;
-import com.example.ernar.myapplication.datamodel.Tweet;
+import com.ernazm.twittersample.network.NetworkClient;
+import com.ernazm.twittersample.datamodel.Tweet;
 
 import java.util.List;
 

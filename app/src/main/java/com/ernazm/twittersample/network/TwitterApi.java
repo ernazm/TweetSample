@@ -1,6 +1,6 @@
-package com.example.ernar.myapplication.network;
+package com.ernazm.twittersample.network;
 
-import com.example.ernar.myapplication.datamodel.Tweet;
+import com.ernazm.twittersample.datamodel.Tweet;
 
 import java.util.List;
 

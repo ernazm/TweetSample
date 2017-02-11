@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication.datamodel;
+package com.ernazm.twittersample.datamodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

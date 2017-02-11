@@ -1,9 +1,9 @@
-package com.example.ernar.myapplication.network;
+package com.ernazm.twittersample.network;
 
 import android.content.Context;
 
-import com.example.ernar.myapplication.R;
-import com.example.ernar.myapplication.datamodel.Tweet;
+import com.ernazm.twittersample.R;
+import com.ernazm.twittersample.datamodel.Tweet;
 
 import java.util.List;
 

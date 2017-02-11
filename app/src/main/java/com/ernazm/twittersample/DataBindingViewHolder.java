@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication;
+package com.ernazm.twittersample;
 
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;

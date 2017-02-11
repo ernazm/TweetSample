@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication;
+package com.example.ernar.twittersample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

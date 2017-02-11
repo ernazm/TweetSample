@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication;
+package com.ernazm.twittersample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ernar.myapplication.databinding.FragmentMainBinding;
-import com.example.ernar.myapplication.datamodel.Tweet;
-import com.example.ernar.myapplication.viewmodel.TweetListViewModel;
+import com.ernazm.twittersample.databinding.FragmentMainBinding;
+import com.ernazm.twittersample.datamodel.Tweet;
+import com.ernazm.twittersample.viewmodel.TweetListViewModel;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
-package com.example.ernar.myapplication;
+package com.ernazm.twittersample;
 
-import com.example.ernar.myapplication.viewmodel.TweetListViewModel;
-import com.example.ernar.myapplication.viewmodel.TweetViewModel;
+import com.ernazm.twittersample.viewmodel.TweetListViewModel;
+import com.ernazm.twittersample.viewmodel.TweetViewModel;
 
 public class TweetsAdapter extends DataBindingAdapter<TweetViewModel> {
 
     private TweetListViewModel tweetListViewModel;
 
     public TweetsAdapter(TweetListViewModel tweetListViewModel) {
-        super(R.layout.list_item, com.example.ernar.myapplication.BR.tweet);
+        super(R.layout.list_item, BR.tweet);
         this.tweetListViewModel = tweetListViewModel;
     }
 
