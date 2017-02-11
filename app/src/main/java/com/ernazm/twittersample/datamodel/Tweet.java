@@ -1,3 +1,4 @@
+
 package com.ernazm.twittersample.datamodel;
 
 import com.google.gson.annotations.Expose;
@@ -5,60 +6,236 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tweet {
 
-    @SerializedName("site")
+    @SerializedName("coordinates")
     @Expose
-    private String site;
-    @SerializedName("name")
+    private Object coordinates;
+    @SerializedName("favorited")
     @Expose
-    private String name;
-    @SerializedName("desc")
+    private boolean favorited;
+    @SerializedName("truncated")
     @Expose
-    private String desc;
-    @SerializedName("link")
+    private boolean truncated;
+    @SerializedName("created_at")
     @Expose
-    private String link;
-    @SerializedName("elementPureHtml")
+    private String createdAt;
+    @SerializedName("id_str")
     @Expose
-    private String elementPureHtml;
+    private String idStr;
+    @SerializedName("entities")
+    @Expose
+    private Entities entities;
+    @SerializedName("in_reply_to_user_id_str")
+    @Expose
+    private Object inReplyToUserIdStr;
+    @SerializedName("contributors")
+    @Expose
+    private Object contributors;
+    @SerializedName("text")
+    @Expose
+    private String text;
+    @SerializedName("retweet_count")
+    @Expose
+    private long retweetCount;
+    @SerializedName("in_reply_to_status_id_str")
+    @Expose
+    private Object inReplyToStatusIdStr;
+    @SerializedName("id")
+    @Expose
+    private long id;
+    @SerializedName("geo")
+    @Expose
+    private Object geo;
+    @SerializedName("retweeted")
+    @Expose
+    private boolean retweeted;
+    @SerializedName("possibly_sensitive")
+    @Expose
+    private boolean possiblySensitive;
+    @SerializedName("in_reply_to_user_id")
+    @Expose
+    private Object inReplyToUserId;
+    @SerializedName("place")
+    @Expose
+    private Object place;
+    @SerializedName("user")
+    @Expose
+    private User user;
+    @SerializedName("in_reply_to_screen_name")
+    @Expose
+    private Object inReplyToScreenName;
+    @SerializedName("source")
+    @Expose
+    private String source;
+    @SerializedName("in_reply_to_status_id")
+    @Expose
+    private Object inReplyToStatusId;
 
-    public String getSite() {
-        return site;
+    public Object getCoordinates() {
+        return coordinates;
     }
 
-    public void setSite(String site) {
-        this.site = site;
+    public void setCoordinates(Object coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public String getName() {
-        return name;
+    public boolean isFavorited() {
+        return favorited;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
     }
 
-    public String getDesc() {
-        return desc;
+    public boolean isTruncated() {
+        return truncated;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTruncated(boolean truncated) {
+        this.truncated = truncated;
     }
 
-    public String getLink() {
-        return link;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getElementPureHtml() {
-        return elementPureHtml;
+    public String getIdStr() {
+        return idStr;
     }
 
-    public void setElementPureHtml(String elementPureHtml) {
-        this.elementPureHtml = elementPureHtml;
+    public void setIdStr(String idStr) {
+        this.idStr = idStr;
+    }
+
+    public Entities getEntities() {
+        return entities;
+    }
+
+    public void setEntities(Entities entities) {
+        this.entities = entities;
+    }
+
+    public Object getInReplyToUserIdStr() {
+        return inReplyToUserIdStr;
+    }
+
+    public void setInReplyToUserIdStr(Object inReplyToUserIdStr) {
+        this.inReplyToUserIdStr = inReplyToUserIdStr;
+    }
+
+    public Object getContributors() {
+        return contributors;
+    }
+
+    public void setContributors(Object contributors) {
+        this.contributors = contributors;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public long getRetweetCount() {
+        return retweetCount;
+    }
+
+    public void setRetweetCount(long retweetCount) {
+        this.retweetCount = retweetCount;
+    }
+
+    public Object getInReplyToStatusIdStr() {
+        return inReplyToStatusIdStr;
+    }
+
+    public void setInReplyToStatusIdStr(Object inReplyToStatusIdStr) {
+        this.inReplyToStatusIdStr = inReplyToStatusIdStr;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Object getGeo() {
+        return geo;
+    }
+
+    public void setGeo(Object geo) {
+        this.geo = geo;
+    }
+
+    public boolean isRetweeted() {
+        return retweeted;
+    }
+
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
+    }
+
+    public boolean isPossiblySensitive() {
+        return possiblySensitive;
+    }
+
+    public void setPossiblySensitive(boolean possiblySensitive) {
+        this.possiblySensitive = possiblySensitive;
+    }
+
+    public Object getInReplyToUserId() {
+        return inReplyToUserId;
+    }
+
+    public void setInReplyToUserId(Object inReplyToUserId) {
+        this.inReplyToUserId = inReplyToUserId;
+    }
+
+    public Object getPlace() {
+        return place;
+    }
+
+    public void setPlace(Object place) {
+        this.place = place;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Object getInReplyToScreenName() {
+        return inReplyToScreenName;
+    }
+
+    public void setInReplyToScreenName(Object inReplyToScreenName) {
+        this.inReplyToScreenName = inReplyToScreenName;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public Object getInReplyToStatusId() {
+        return inReplyToStatusId;
+    }
+
+    public void setInReplyToStatusId(Object inReplyToStatusId) {
+        this.inReplyToStatusId = inReplyToStatusId;
     }
 
 }

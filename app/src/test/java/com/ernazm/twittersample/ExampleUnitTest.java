@@ -1,4 +1,4 @@
-package com.example.ernar.twittersample;
+package com.ernazm.twittersample;
 
 import org.junit.Test;
 

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="twitter_base_url">http://www.umori.li/</string>
+    <string name="twitter_base_url">https://api.twitter.com/</string>
+    <string name="api_key">TsXHsDFEqZ3BTiIuAkKf4KrDn</string>
+    <string name="api_secret">VrS4zTE6xMZ7qGrcXQuFMc9mo3DTGoMdFUeF3tdwatjBSkGibr</string>
 </resources>
