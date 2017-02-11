@@ -8,7 +8,7 @@ public class TweetsAdapter extends DataBindingAdapter<TweetViewModel> {
     private TweetListViewModel tweetListViewModel;
 
     public TweetsAdapter(TweetListViewModel tweetListViewModel) {
-        super(R.layout.list_item, BR.tweet);
+        super(R.layout.tweet_list_item, BR.tweet);
         this.tweetListViewModel = tweetListViewModel;
     }
 

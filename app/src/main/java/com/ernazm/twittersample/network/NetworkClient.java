@@ -19,11 +19,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
 
+    private static final int TWEETS_FETCH_COUNT = 30;
+
     private static NetworkClient instance;
 
     private TwitterApi twitterApi;
     private final Context context;
-    private String accessToken;
+    private AuthToken authToken;
 
     public static void init(Context context) {
         instance = new NetworkClient(context);
@@ -48,15 +50,15 @@ public class NetworkClient {
         return Base64.encodeToString((apiKey + ":" + apiSecret).getBytes(), Base64.NO_WRAP);
     }
 
-    public void requestTweets(final Callback<List<Tweet>> callback) {
-        if (accessToken == null) {
+    public void requestTweets(final String username, final Callback<List<Tweet>> callback) {
+        if (authToken == null || !authToken.isBearer()) {
             twitterApi.getAuthToken("Basic " + getTokenCredentials(context), "client_credentials").enqueue(new Callback<AuthToken>() {
                 @Override
                 public void onResponse(Call<AuthToken> call, Response<AuthToken> response) {
                     if (response.isSuccessful()) {
-                        if (response.body().getTokenType().equalsIgnoreCase("bearer")) {
-                            accessToken = response.body().getAccessToken();
-                            twitterApi.getData("Bearer " + accessToken, "ernazmus", 10).enqueue(callback);
+                        authToken = response.body();
+                        if (authToken.isBearer()) {
+                            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
                         }
                     } else try {
                         Log.w(response.errorBody().string());
@@ -71,7 +73,7 @@ public class NetworkClient {
                 }
             });
         } else {
-            twitterApi.getData(accessToken, "twitterapi", 10).enqueue(callback);
+            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
         }
     }
 

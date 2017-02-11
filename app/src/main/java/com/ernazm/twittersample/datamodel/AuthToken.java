@@ -28,4 +28,16 @@ public class AuthToken {
         this.accessToken = accessToken;
     }
 
+    public String toAuthString() {
+        return tokenType + " " + accessToken;
+    }
+
+    @Override
+    public String toString() {
+        return toAuthString();
+    }
+
+    public boolean isBearer() {
+        return getTokenType().equalsIgnoreCase("bearer");
+    }
 }
