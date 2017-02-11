@@ -5,16 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.ernar.myapplication.network.NetworkClient;
-import com.example.ernar.myapplication.model.Tweet;
+import com.example.ernar.myapplication.datamodel.Tweet;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,17 +35,15 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                NetworkClient.getInstance().getApi().getData("bash", 10).enqueue(new Callback<List<Tweet>>() {
+                                NetworkClient.getInstance().requestTweets(new Callback<List<Tweet>>() {
                                     @Override
                                     public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
-                                        Log.d(MainActivity.class.getName(), response.toString());
-                                        //TODO check if successful
                                         ((MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment)).onListLoaded(response.body());
                                     }
 
                                     @Override
                                     public void onFailure(Call<List<Tweet>> call, Throwable t) {
-
+                                        t.printStackTrace();
                                     }
                                 });
                             }

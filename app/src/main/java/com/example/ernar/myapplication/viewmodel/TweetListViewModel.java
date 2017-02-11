@@ -1,6 +1,6 @@
 package com.example.ernar.myapplication.viewmodel;
 
-import com.example.ernar.myapplication.model.Tweet;
+import com.example.ernar.myapplication.datamodel.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;

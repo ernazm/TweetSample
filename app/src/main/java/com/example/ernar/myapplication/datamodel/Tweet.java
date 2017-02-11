@@ -1,4 +1,4 @@
-package com.example.ernar.myapplication.model;
+package com.example.ernar.myapplication.datamodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

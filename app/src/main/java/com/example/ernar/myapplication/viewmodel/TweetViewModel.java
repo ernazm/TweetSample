@@ -5,7 +5,7 @@ import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
 
-import com.example.ernar.myapplication.model.Tweet;
+import com.example.ernar.myapplication.datamodel.Tweet;
 
 public class TweetViewModel {
     public final ObservableField<String> name = new ObservableField<>();

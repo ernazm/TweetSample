@@ -1,27 +1,41 @@
 package com.example.ernar.myapplication.network;
 
+import android.content.Context;
+
+import com.example.ernar.myapplication.R;
+import com.example.ernar.myapplication.datamodel.Tweet;
+
+import java.util.List;
+
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
-    private static NetworkClient ourInstance = new NetworkClient();
 
-    private UmoriliApi umoriliApi;
-    private Retrofit retrofit;
+    private static NetworkClient instance;
 
-    public UmoriliApi getApi() {
-        return umoriliApi;
+    private TwitterApi twitterApi;
+    private String authorization;
+
+    public static void init(Context context) {
+        instance = new NetworkClient(context);
     }
 
     public static NetworkClient getInstance() {
-        return ourInstance;
+        return instance;
     }
 
-    private NetworkClient() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.umori.li/")
+    private NetworkClient(Context context) {
+        twitterApi = new Retrofit.Builder()
+                .baseUrl(context.getString(R.string.twitter_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        umoriliApi = retrofit.create(UmoriliApi.class);
+                .build()
+                .create(TwitterApi.class);
     }
+
+    public void requestTweets(Callback<List<Tweet>> callback){
+        twitterApi.getData(authorization,"twitterapi", 10).enqueue(callback);
+    }
+
 }

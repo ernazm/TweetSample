@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ernar.myapplication.databinding.FragmentMainBinding;
-import com.example.ernar.myapplication.model.Tweet;
+import com.example.ernar.myapplication.datamodel.Tweet;
 import com.example.ernar.myapplication.viewmodel.TweetListViewModel;
 
 import java.util.List;
-
-import retrofit2.Response;
 
 /**
  * A placeholder fragment containing a simple view.
