@@ -15,26 +15,41 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/postitem_post"
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="@{tweet.username}"
+            tools:text="username" />
+
+        <TextView
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/username"
+            android:autoLink="all"
             android:text="@{tweet.content}"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="content" />
 
         <TextView
-            android:id="@+id/postitem_site"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/source"
+            android:layout_marginEnd="6dp"
+            android:layout_toStartOf="@+id/source"
+            android:text="@string/via" />
+
+        <TextView
+            android:id="@+id/source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/postitem_post"
+            android:layout_below="@+id/content"
             android:gravity="end"
-            android:text="@{tweet.site}"
+            android:text="@{tweet.source}"
             android:textAlignment="textEnd"
-            tools:text="site" />
+            tools:text="source" />
     </RelativeLayout>
 </layout>
