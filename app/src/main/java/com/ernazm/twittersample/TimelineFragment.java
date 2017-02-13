@@ -14,6 +14,7 @@ import com.ernazm.twittersample.network.TwitterClient;
 import com.ernazm.twittersample.viewmodel.TweetListViewModel;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,27 +48,38 @@ public class TimelineFragment extends Fragment {
     }
 
     public void requestTimeline(String username) {
-        TwitterClient.getInstance().requestTweets(username, new Callback<List<Tweet>>() {
-            @Override
-            public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
+        TwitterClient.getInstance().requestTweets(username, new OnTweetsLoadedCallback(this));
+    }
+
+    public void onListLoaded(List<Tweet> tweets) {
+        tweetListViewModel.set(tweets);
+        binding.list.getAdapter().notifyDataSetChanged();
+    }
+
+    private static class OnTweetsLoadedCallback implements Callback<List<Tweet>> {
+        private WeakReference<TimelineFragment> fragment;
+
+        public OnTweetsLoadedCallback(final TimelineFragment fragment) {
+            this.fragment = new WeakReference<>(fragment);
+        }
+
+        @Override
+        public void onResponse(Call<List<Tweet>> call, final Response<List<Tweet>> response) {
+            final TimelineFragment fragment = this.fragment.get();
+            if (fragment != null) {
                 if (response.isSuccessful())
-                    onListLoaded(response.body());
+                    fragment.onListLoaded(response.body());
                 else try {
                     Log.w(response.errorBody().string());
                 } catch (IOException e) {
                     Log.w(e);
                 }
             }
+        }
 
-            @Override
-            public void onFailure(Call<List<Tweet>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-    public void onListLoaded(List<Tweet> tweets) {
-        tweetListViewModel.set(tweets);
-        binding.list.getAdapter().notifyDataSetChanged();
+        @Override
+        public void onFailure(Call<List<Tweet>> call, Throwable t) {
+            Log.w(t);
+        }
     }
 }

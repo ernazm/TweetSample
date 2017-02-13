@@ -20,16 +20,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TwitterClient {
 
     private static final String GRANT_TYPE = "client_credentials";
+    private static int TWEETS_FETCH_COUNT;
 
     private static TwitterClient instance;
-
     private final TwitterApi twitterApi;
     private final String tokenCredentials;
-    private final int tweetsFetchCount;
 
     private AuthToken authToken;
 
     public static void init(Context context) {
+        TWEETS_FETCH_COUNT = context.getResources().getInteger(R.integer.tweets_fetch_count);
+
         instance = new TwitterClient(context);
     }
 
@@ -41,7 +42,6 @@ public class TwitterClient {
         final String apiKey = context.getString(R.string.api_key);
         final String apiSecret = context.getString(R.string.api_secret);
         tokenCredentials = getTokenCredentials(apiKey, apiSecret);
-        tweetsFetchCount = context.getResources().getInteger(R.integer.tweets_fetch_count);
         twitterApi = new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.twitter_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -61,7 +61,7 @@ public class TwitterClient {
                     if (response.isSuccessful()) {
                         authToken = response.body();
                         if (authToken.isBearer()) {
-                            twitterApi.getData(authToken.toAuthString(), username, tweetsFetchCount).enqueue(callback);
+                            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
                         }
                     } else try {
                         Log.w(response.errorBody().string());
@@ -76,7 +76,7 @@ public class TwitterClient {
                 }
             });
         } else {
-            twitterApi.getData(authToken.toAuthString(), username, tweetsFetchCount).enqueue(callback);
+            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
         }
     }
 
