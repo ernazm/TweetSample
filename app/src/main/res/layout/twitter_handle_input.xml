@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions"
-            android:text="ernazmus"
             android:minWidth="100dp">
 
             <requestFocus />
