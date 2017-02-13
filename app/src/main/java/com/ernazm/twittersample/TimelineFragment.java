@@ -20,27 +20,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class TimelineFragment extends Fragment {
+
+    private static final String BUNDLE_KEY_TWEET_LIST_VIEW_MODEL = "tweetListViewModel";
 
     private FragmentTimelineBinding binding;
     private TweetListViewModel tweetListViewModel;
-
-    public TimelineFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTimelineBinding.inflate(inflater, container, false);
-        tweetListViewModel = new TweetListViewModel();
+        tweetListViewModel = savedInstanceState == null ? new TweetListViewModel()
+                : savedInstanceState.<TweetListViewModel>getParcelable(BUNDLE_KEY_TWEET_LIST_VIEW_MODEL);
 
         binding.list.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.list.setAdapter(new TweetsAdapter(tweetListViewModel));
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_KEY_TWEET_LIST_VIEW_MODEL, tweetListViewModel);
     }
 
     public void requestTimeline(String username) {
@@ -52,7 +55,7 @@ public class TimelineFragment extends Fragment {
                 else try {
                     Log.w(response.errorBody().string());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.w(e);
                 }
             }
 

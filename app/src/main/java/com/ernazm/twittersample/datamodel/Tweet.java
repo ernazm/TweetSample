@@ -1,10 +1,13 @@
 
 package com.ernazm.twittersample.datamodel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tweet {
+public class Tweet implements Parcelable {
 
     @SerializedName("coordinates")
     @Expose
@@ -238,4 +241,71 @@ public class Tweet {
         this.inReplyToStatusId = inReplyToStatusId;
     }
 
+
+    protected Tweet(Parcel in) {
+        coordinates = (Object) in.readValue(Object.class.getClassLoader());
+        favorited = in.readByte() != 0x00;
+        truncated = in.readByte() != 0x00;
+        createdAt = in.readString();
+        idStr = in.readString();
+        entities = (Entities) in.readValue(Entities.class.getClassLoader());
+        inReplyToUserIdStr = in.readValue(Object.class.getClassLoader());
+        contributors = in.readValue(Object.class.getClassLoader());
+        text = in.readString();
+        retweetCount = in.readLong();
+        inReplyToStatusIdStr = in.readValue(Object.class.getClassLoader());
+        id = in.readLong();
+        geo = in.readValue(Object.class.getClassLoader());
+        retweeted = in.readByte() != 0x00;
+        possiblySensitive = in.readByte() != 0x00;
+        inReplyToUserId = in.readValue(Object.class.getClassLoader());
+        place = in.readValue(Object.class.getClassLoader());
+        user = (User) in.readValue(User.class.getClassLoader());
+        inReplyToScreenName = in.readValue(Object.class.getClassLoader());
+        source = in.readString();
+        inReplyToStatusId = in.readValue(Object.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(coordinates);
+        dest.writeByte((byte) (favorited ? 0x01 : 0x00));
+        dest.writeByte((byte) (truncated ? 0x01 : 0x00));
+        dest.writeString(createdAt);
+        dest.writeString(idStr);
+        dest.writeValue(entities);
+        dest.writeValue(inReplyToUserIdStr);
+        dest.writeValue(contributors);
+        dest.writeString(text);
+        dest.writeLong(retweetCount);
+        dest.writeValue(inReplyToStatusIdStr);
+        dest.writeLong(id);
+        dest.writeValue(geo);
+        dest.writeByte((byte) (retweeted ? 0x01 : 0x00));
+        dest.writeByte((byte) (possiblySensitive ? 0x01 : 0x00));
+        dest.writeValue(inReplyToUserId);
+        dest.writeValue(place);
+        dest.writeValue(user);
+        dest.writeValue(inReplyToScreenName);
+        dest.writeString(source);
+        dest.writeValue(inReplyToStatusId);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Tweet> CREATOR = new Parcelable.Creator<Tweet>() {
+        @Override
+        public Tweet createFromParcel(Parcel in) {
+            return new Tweet(in);
+        }
+
+        @Override
+        public Tweet[] newArray(int size) {
+            return new Tweet[size];
+        }
+    };
 }

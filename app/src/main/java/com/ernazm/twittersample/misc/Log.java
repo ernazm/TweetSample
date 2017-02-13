@@ -11,8 +11,13 @@ public class Log {
             android.util.Log.d(TAG, message.toString());
     }
 
-    public static void w(Object message) {
+    public static void w(String message) {
         if (BuildConfig.DEBUG)
-            android.util.Log.w(TAG, message.toString());
+            android.util.Log.w(TAG, message);
+    }
+
+    public static void w(Throwable t) {
+        if (BuildConfig.DEBUG)
+            android.util.Log.w(TAG, t);
     }
 }
