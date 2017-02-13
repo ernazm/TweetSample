@@ -4,11 +4,11 @@ import com.ernazm.twittersample.BuildConfig;
 
 public class Log {
 
-    public static final String TAG = "TweetSample";
+    private static final String TAG = "TweetSample";
 
-    public static void d(Object message) {
+    public static void d(String message) {
         if (BuildConfig.DEBUG)
-            android.util.Log.d(TAG, message.toString());
+            android.util.Log.d(TAG, message);
     }
 
     public static void w(String message) {

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.ernazm.twittersample.databinding.FragmentTimelineBinding;
 import com.ernazm.twittersample.datamodel.Tweet;
 import com.ernazm.twittersample.misc.Log;
-import com.ernazm.twittersample.network.NetworkClient;
+import com.ernazm.twittersample.network.TwitterClient;
 import com.ernazm.twittersample.viewmodel.TweetListViewModel;
 
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class TimelineFragment extends Fragment {
     }
 
     public void requestTimeline(String username) {
-        NetworkClient.getInstance().requestTweets(username, new Callback<List<Tweet>>() {
+        TwitterClient.getInstance().requestTweets(username, new Callback<List<Tweet>>() {
             @Override
             public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
                 if (response.isSuccessful())

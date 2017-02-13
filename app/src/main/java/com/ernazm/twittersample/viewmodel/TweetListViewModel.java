@@ -3,6 +3,8 @@ package com.ernazm.twittersample.viewmodel;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.android.annotations.NonNull;
+import com.android.annotations.Nullable;
 import com.ernazm.twittersample.datamodel.Tweet;
 
 import java.util.ArrayList;
@@ -15,18 +17,19 @@ public class TweetListViewModel implements Parcelable {
     public TweetListViewModel() {
     }
 
-    protected TweetListViewModel(Parcel in) {
-        tweetViewModels = new ArrayList<>();
+    private TweetListViewModel(Parcel in) {
         in.readList(tweetViewModels, TweetViewModel.class.getClassLoader());
     }
 
-    public void set(List<Tweet> tweets) {
+    public void set(@Nullable List<Tweet> tweets) {
         tweetViewModels.clear();
-        for (Tweet tweet : tweets) {
-            tweetViewModels.add(new TweetViewModel(tweet));
-        }
+        if (tweets != null)
+            for (Tweet tweet : tweets) {
+                tweetViewModels.add(new TweetViewModel(tweet));
+            }
     }
 
+    @NonNull
     public TweetViewModel get(int position) {
         return tweetViewModels.get(position);
     }

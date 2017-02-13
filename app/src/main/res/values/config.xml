@@ -3,4 +3,5 @@
     <string name="twitter_base_url">https://api.twitter.com/</string>
     <string name="api_key">TsXHsDFEqZ3BTiIuAkKf4KrDn</string>
     <string name="api_secret">VrS4zTE6xMZ7qGrcXQuFMc9mo3DTGoMdFUeF3tdwatjBSkGibr</string>
+    <integer name="tweets_fetch_count">30</integer>
 </resources>

@@ -17,26 +17,31 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkClient {
+public class TwitterClient {
 
-    private static final int TWEETS_FETCH_COUNT = 30;
+    private static final String GRANT_TYPE = "client_credentials";
 
-    private static NetworkClient instance;
+    private static TwitterClient instance;
 
-    private TwitterApi twitterApi;
-    private final Context context;
+    private final TwitterApi twitterApi;
+    private final String tokenCredentials;
+    private final int tweetsFetchCount;
+
     private AuthToken authToken;
 
     public static void init(Context context) {
-        instance = new NetworkClient(context);
+        instance = new TwitterClient(context);
     }
 
-    public static NetworkClient getInstance() {
+    public static TwitterClient getInstance() {
         return instance;
     }
 
-    private NetworkClient(Context context) {
-        this.context = context.getApplicationContext();
+    private TwitterClient(Context context) {
+        final String apiKey = context.getString(R.string.api_key);
+        final String apiSecret = context.getString(R.string.api_secret);
+        tokenCredentials = getTokenCredentials(apiKey, apiSecret);
+        tweetsFetchCount = context.getResources().getInteger(R.integer.tweets_fetch_count);
         twitterApi = new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.twitter_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -44,21 +49,19 @@ public class NetworkClient {
                 .create(TwitterApi.class);
     }
 
-    private String getTokenCredentials(Context context) {
-        String apiKey = context.getString(R.string.api_key);
-        String apiSecret = context.getString(R.string.api_secret);
+    private String getTokenCredentials(String apiKey, String apiSecret) {
         return Base64.encodeToString((apiKey + ":" + apiSecret).getBytes(), Base64.NO_WRAP);
     }
 
     public void requestTweets(final String username, final Callback<List<Tweet>> callback) {
         if (authToken == null || !authToken.isBearer()) {
-            twitterApi.getAuthToken("Basic " + getTokenCredentials(context), "client_credentials").enqueue(new Callback<AuthToken>() {
+            twitterApi.getAuthToken("Basic " + tokenCredentials, GRANT_TYPE).enqueue(new Callback<AuthToken>() {
                 @Override
                 public void onResponse(Call<AuthToken> call, Response<AuthToken> response) {
                     if (response.isSuccessful()) {
                         authToken = response.body();
                         if (authToken.isBearer()) {
-                            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
+                            twitterApi.getData(authToken.toAuthString(), username, tweetsFetchCount).enqueue(callback);
                         }
                     } else try {
                         Log.w(response.errorBody().string());
@@ -69,11 +72,11 @@ public class NetworkClient {
 
                 @Override
                 public void onFailure(Call<AuthToken> call, Throwable t) {
-                    t.printStackTrace();
+                    Log.w(t);
                 }
             });
         } else {
-            twitterApi.getData(authToken.toAuthString(), username, TWEETS_FETCH_COUNT).enqueue(callback);
+            twitterApi.getData(authToken.toAuthString(), username, tweetsFetchCount).enqueue(callback);
         }
     }
 
